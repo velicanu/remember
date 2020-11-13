@@ -1,0 +1,5 @@
+google-cloud-speech
+black
+isort
+flake8
+streamlit
