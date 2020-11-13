@@ -1,6 +1,29 @@
-from elasticsearch import Elasticsearch
+import os
 
-ES = Elasticsearch()
+import boto3
+from elasticsearch import Elasticsearch, RequestsHttpConnection
+from requests_aws4auth import AWS4Auth
+
+host = os.getenv("ES_HOST", "localhost")
+
+if host == "localhost":
+    ES = Elasticsearch()
+else:
+    credentials = boto3.Session().get_credentials()
+    awsauth = AWS4Auth(
+        credentials.access_key,
+        credentials.secret_key,
+        os.getenv("AWS_DEFAULT_REGION", "us-east-1"),
+        "es",
+        session_token=credentials.token,
+    )
+    ES = Elasticsearch(
+        hosts=[{"host": host, "port": 443}],
+        http_auth=awsauth,
+        use_ssl=True,
+        verify_certs=True,
+        connection_class=RequestsHttpConnection,
+    )
 
 
 def get_doc(query):

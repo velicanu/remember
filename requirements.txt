@@ -4,3 +4,5 @@ isort
 flake8
 streamlit
 elasticsearch
+requests_aws4auth
+awscli
