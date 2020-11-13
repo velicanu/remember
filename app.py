@@ -4,6 +4,7 @@ from pathlib import Path
 
 import streamlit as st
 import streamlit.components.v1 as components
+from urllib2 import urlopen
 
 from es import add_doc, delete_doc, get_doc, update_doc
 from transcribe import get_state, put_state, transcribe
@@ -13,6 +14,12 @@ def _update_state(state, query, value):
     state["transcript"] = query
     state["value"] = value
     put_state(state)
+
+
+def _urlify(value):
+    if value.startswith("http") or value.startswith("www."):
+        return f'<a href="{value}">value</a>'
+    return value
 
 
 get_audio = components.declare_component("get_audio", path="frontend/build")
@@ -40,7 +47,7 @@ with res1:
     )
 with res2:
     st.markdown(
-        f'<p style="font-size:150%">{top_doc.get("value")}</p>',
+        f'<p style="font-size:150%">{_urlify(top_doc.get("value"))}</p>',
         unsafe_allow_html=True,
     )
 
