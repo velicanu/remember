@@ -1,5 +1,6 @@
 import base64
 import os
+from pathlib import Path
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -20,6 +21,7 @@ audio = get_audio()
 
 os.makedirs("data", exist_ok=True)
 file_name = os.path.join("data", "out.mp4")
+Path(file_name).touch()
 
 if audio:
     with open(file_name, "wb") as out:
