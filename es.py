@@ -25,6 +25,12 @@ else:
         connection_class=RequestsHttpConnection,
     )
 
+ES.index(
+    index="test-index",
+    body={"__init__": True},
+    refresh=True,
+)
+
 
 def get_doc(query):
     res = ES.search(
