@@ -4,7 +4,6 @@ from pathlib import Path
 
 import streamlit as st
 import streamlit.components.v1 as components
-from urllib2 import urlopen
 
 from es import add_doc, delete_doc, get_doc, update_doc
 from transcribe import get_state, put_state, transcribe
