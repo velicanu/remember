@@ -44,7 +44,7 @@ def transcribe(file_):
     wav_file = filename.with_suffix(".wav")
 
     subprocess.run(
-        f"ffmpeg -i {file_} -vn -acodec pcm_s16le -ar 16000 -ac 2 {wav_file}".split(),
+        f"ffmpeg -i {file_} -vn -acodec pcm_s16le -ar 16000 -ac 2 {wav_file} -y".split(),
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
