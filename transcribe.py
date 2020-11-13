@@ -35,6 +35,9 @@ def cache(func):
 
 @cache
 def transcribe(file_):
+    if os.stat(file_).st_size == 0:
+        return
+
     # Instantiates a client
     client = speech.SpeechClient()
     filename = Path(file_)

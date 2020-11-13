@@ -4,9 +4,11 @@
 
 - python3, < 3.9 (numpy currently broken on 3.9)
 - node
+- ffmpeg
 - google api set up for speech recognition
   - ex: ENV variable `GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json`
 - access to an Elasticsearch cluster
+  - localhost or AWS
 
 ## Installation
 
