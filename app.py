@@ -16,7 +16,7 @@ def _update_state(state, query, value):
 
 
 def _urlify(value):
-    if value.startswith("http") or value.startswith("www."):
+    if value and (value.startswith("http") or value.startswith("www.")):
         return f'<a href="{value}">{value}</a>'
     return value
 
