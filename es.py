@@ -35,6 +35,14 @@ ES.index(
 def get_doc(query):
     res = ES.search(
         index="test-index",
+        body={"query": {"query_string": {"query": f'"{query}"'}}},
+    )
+    source = res["hits"]["hits"][0]["_source"] if res["hits"]["hits"] else {}
+    if source:
+        return source, res["hits"]["hits"][0]["_id"]
+
+    res = ES.search(
+        index="test-index",
         body={"query": {"match": {"key": {"query": query}}}},
     )
     source = res["hits"]["hits"][0]["_source"] if res["hits"]["hits"] else {}
